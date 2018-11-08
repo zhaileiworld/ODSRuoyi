@@ -14,7 +14,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @MapperScan("com.ruoyi.project.*.*.mapper")
 public class RuoYiApplication
 {
-
     public static void main(String[] args)
     {
         // System.setProperty("spring.devtools.restart.enabled", "false");
