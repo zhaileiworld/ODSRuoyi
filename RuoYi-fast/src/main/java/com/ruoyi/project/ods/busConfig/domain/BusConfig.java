@@ -71,7 +71,14 @@ public class BusConfig extends BaseEntity
 		return beforeDate;
 	}
 
-    public String toString() {
+	public BusConfig() {
+	}
+
+	public BusConfig(Integer status) {
+		this.status = status;
+	}
+
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("description", getDescription())

@@ -1,6 +1,8 @@
 package com.ruoyi.project.ods.bus.service;
 
 import com.ruoyi.project.ods.bus.domain.Bus;
+import com.ruoyi.project.ods.busConfig.domain.BusConfig;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,11 @@ public interface IBusService
      * @return 结果
      */
 	public int deleteBusByIds(String ids);
-	
+
+	/**
+	 * 根据业务配置表的条件查询对应业务主表的列表
+	 * @param BusConfig
+	 * @return List<>
+	 * */
+	public List<Bus> selectByBusConfig(BusConfig config);
 }

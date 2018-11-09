@@ -18,6 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="selectBusVo">
         select id, tablename, tabledesc, filename, addtime, updatetime, isupdate, configId from tf_bus
     </sql>
+    <sql id="selectNor">
+        select id, tablename, filename from tf_bus
+    </sql>
 	
     <select id="selectBusList" parameterType="Bus" resultMap="BusResult">
         <include refid="selectBusVo"/>
@@ -32,11 +35,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="configId != null "> and configId = #{configId}</if>
          </where>
     </select>
-    
+
+    <select id="selectByBusConfig" parameterType="com.ruoyi.project.ods.busConfig.domain.BusConfig" resultMap="BusResult">
+        <include refid="selectNor"/>
+        where configId in(
+          select c.id from tf_bus_config c
+            <where>
+                <if test="id != null"> and c.id = #{id}</if>
+                <if test="status != null"> and c.status = #{status}</if>
+                <if test="beginDate != null  and beginDate != '' "> and c.beginDate = #{beginDate}</if>
+                <if test="beforeDate != null  and beforeDate != '' "> and c.beforeDate = #{beforeDate}</if>
+            </where>
+        )
+    </select>
+
     <select id="selectBusById" parameterType="Integer" resultMap="BusResult">
         <include refid="selectBusVo"/>
         where id = #{id}
     </select>
+
         
     <insert id="insertBus" parameterType="Bus">
         insert into tf_bus
