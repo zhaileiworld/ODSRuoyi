@@ -50,9 +50,14 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 modalName: "业务配置",
+                search: false,
                 columns: [{
 		            checkbox: true
 		        },
+				{
+					field : 'id',
+					title : 'id'
+				},
 				{
 					field : 'description', 
 					title : '业务描述' 
