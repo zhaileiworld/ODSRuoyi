@@ -1,8 +1,7 @@
-package com.ruoyi.project.ods.bus.controller;
+package com.ruoyi.project.ods.plan.controller;
 
 import java.util.List;
 
-import com.ruoyi.project.ods.busConfig.service.IBusConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,48 +13,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.ods.bus.domain.Bus;
-import com.ruoyi.project.ods.bus.service.IBusService;
+import com.ruoyi.project.ods.plan.domain.Plan;
+import com.ruoyi.project.ods.plan.service.IPlanService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.framework.web.domain.AjaxResult;
 
 /**
- * 业务主 信息操作处理
+ * 计划执行记录 信息操作处理
  *
  * @author ruoyi
  * @date 2018-11-09
  */
 @Controller
-@RequestMapping("/ods/bus")
-public class BusController extends BaseController {
-    private String prefix = "ods/bus";
+@RequestMapping("/ods/plan")
+public class PlanController extends BaseController {
+    private String prefix = "ods/plan";
 
     @Autowired
-    private IBusService busService;
-    @Autowired
-    private IBusConfigService configService;
+    private IPlanService planService;
 
-    @RequiresPermissions("ods:bus:view")
+    @RequiresPermissions("ods:plan:view")
     @GetMapping()
-    public String bus() {
-        return prefix + "/bus";
+    public String plan() {
+        return prefix + "/plan";
     }
 
     /**
-     * 查询业务主列表
+     * 查询计划执行记录列表
      */
-    @RequiresPermissions("ods:bus:list")
+    @RequiresPermissions("ods:plan:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Bus bus) {
+    public TableDataInfo list(Plan plan) {
         startPage();
-        List<Bus> list = busService.selectBusList(bus);
+        List<Plan> list = planService.selectPlanList(plan);
         return getDataTable(list);
     }
 
     /**
-     * 新增业务
+     * 新增计划执行记录
      */
     @GetMapping("/add")
     public String add() {
@@ -63,46 +60,46 @@ public class BusController extends BaseController {
     }
 
     /**
-     * 新增保存业务主表
+     * 新增保存计划执行记录
      */
-    @RequiresPermissions("ods:bus:add")
-    @Log(title = "业务主表", businessType = BusinessType.INSERT)
+    @RequiresPermissions("ods:plan:add")
+    @Log(title = "计划执行记录", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Bus bus) {
-        return toAjax(busService.insertBus(bus));
+    public AjaxResult addSave(Plan plan) {
+        return toAjax(planService.insertPlan(plan));
     }
 
     /**
-     * 修改业务
+     * 修改计划执行记录
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
-        Bus bus = busService.selectBusById(id);
-        mmap.put("bus", bus);
+        Plan plan = planService.selectPlanById(id);
+        mmap.put("plan", plan);
         return prefix + "/edit";
     }
 
     /**
-     * 修改保存业务
+     * 修改保存计划执行记录
      */
-    @RequiresPermissions("ods:bus:edit")
-    @Log(title = "业务主表", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("ods:plan:edit")
+    @Log(title = "计划执行记录", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Bus bus) {
-        return toAjax(busService.updateBus(bus));
+    public AjaxResult editSave(Plan plan) {
+        return toAjax(planService.updatePlan(plan));
     }
 
     /**
-     * 删除业务
+     * 删除计划执行记录
      */
-    @RequiresPermissions("ods:bus:remove")
-    @Log(title = "业务主表", businessType = BusinessType.DELETE)
+    @RequiresPermissions("ods:plan:remove")
+    @Log(title = "计划执行记录", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
-        return toAjax(busService.deleteBusByIds(ids));
+        return toAjax(planService.deletePlanByIds(ids));
     }
 
 }

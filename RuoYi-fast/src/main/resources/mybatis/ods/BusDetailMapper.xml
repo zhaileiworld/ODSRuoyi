@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.ods.busDetail.mapper.BusDetailMapper">
+    
+    <resultMap type="BusDetail" id="BusDetailResult">
+        <result property="id"    column="id"    />
+        <result property="tableid"    column="tableid"    />
+        <result property="fieldlocation"    column="fieldlocation"    />
+        <result property="fieldname"    column="fieldname"    />
+        <result property="fielddesc"    column="fielddesc"    />
+        <result property="type"    column="type"    />
+        <result property="iskey"    column="iskey"    />
+        <result property="length"    column="length"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+	
+	<sql id="selectBusDetailVo">
+        select id, tableid, fieldlocation, fieldname, fielddesc, type, iskey, length, addtime, updatetime from tf_bus_detail
+    </sql>
+	
+    <select id="selectBusDetailList" parameterType="BusDetail" resultMap="BusDetailResult">
+        <include refid="selectBusDetailVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="tableid != null "> and tableid = #{tableid}</if>
+             <if test="fieldlocation != null "> and fieldlocation = #{fieldlocation}</if>
+             <if test="fieldname != null  and fieldname != '' "> and fieldname = #{fieldname}</if>
+             <if test="fielddesc != null  and fielddesc != '' "> and fielddesc = #{fielddesc}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="iskey != null "> and iskey = #{iskey}</if>
+             <if test="length != null "> and length = #{length}</if>
+             <if test="addtime != null  and addtime != '' "> and addtime = #{addtime}</if>
+             <if test="updatetime != null  and updatetime != '' "> and updatetime = #{updatetime}</if>
+         </where>
+    </select>
+    
+    <select id="selectBusDetailById" parameterType="Integer" resultMap="BusDetailResult">
+        <include refid="selectBusDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusDetail" parameterType="BusDetail">
+        insert into tf_bus_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="tableid != null  ">tableid,</if>
+			<if test="fieldlocation != null  ">fieldlocation,</if>
+			<if test="fieldname != null  and fieldname != ''  ">fieldname,</if>
+			<if test="fielddesc != null  and fielddesc != ''  ">fielddesc,</if>
+			<if test="type != null  ">type,</if>
+			<if test="iskey != null  ">iskey,</if>
+			<if test="length != null  ">length,</if>
+			<if test="addtime != null  and addtime != ''  ">addtime,</if>
+			<if test="updatetime != null  and updatetime != ''  ">updatetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="tableid != null  ">#{tableid},</if>
+			<if test="fieldlocation != null  ">#{fieldlocation},</if>
+			<if test="fieldname != null  and fieldname != ''  ">#{fieldname},</if>
+			<if test="fielddesc != null  and fielddesc != ''  ">#{fielddesc},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="iskey != null  ">#{iskey},</if>
+			<if test="length != null  ">#{length},</if>
+			<if test="addtime != null  and addtime != ''  ">#{addtime},</if>
+			<if test="updatetime != null  and updatetime != ''  ">#{updatetime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateBusDetail" parameterType="BusDetail">
+        update tf_bus_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tableid != null  ">tableid = #{tableid},</if>
+            <if test="fieldlocation != null  ">fieldlocation = #{fieldlocation},</if>
+            <if test="fieldname != null  and fieldname != ''  ">fieldname = #{fieldname},</if>
+            <if test="fielddesc != null  and fielddesc != ''  ">fielddesc = #{fielddesc},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="iskey != null  ">iskey = #{iskey},</if>
+            <if test="length != null  ">length = #{length},</if>
+            <if test="addtime != null  and addtime != ''  ">addtime = #{addtime},</if>
+            <if test="updatetime != null  and updatetime != ''  ">updatetime = #{updatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteBusDetailById" parameterType="Integer">
+        delete from tf_bus_detail where id = #{id}
+    </delete>
+	
+    <delete id="deleteBusDetailByIds" parameterType="String">
+        delete from tf_bus_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
