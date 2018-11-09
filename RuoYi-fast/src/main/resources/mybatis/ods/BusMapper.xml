@@ -45,7 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="tablename != null  and tablename != ''  ">tablename,</if>
 			<if test="tabledesc != null  and tabledesc != ''  ">tabledesc,</if>
 			<if test="filename != null  and filename != ''  ">filename,</if>
-			<if test="addtime != null  and addtime != ''  ">addtime,</if>
+            <if test="fieldtype != null  and fieldtype != ''  ">fieldtype,</if>
+			addtime,
 			<if test="updatetime != null  and updatetime != ''  ">updatetime,</if>
 			<if test="isupdate != null  ">isupdate,</if>
 			<if test="configId != null  ">configId,</if>
@@ -55,7 +56,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="tablename != null  and tablename != ''  ">#{tablename},</if>
 			<if test="tabledesc != null  and tabledesc != ''  ">#{tabledesc},</if>
 			<if test="filename != null  and filename != ''  ">#{filename},</if>
-			<if test="addtime != null  and addtime != ''  ">#{addtime},</if>
+            <if test="fieldtype != null  and fieldtype != ''  ">fieldtype,</if>
+            DATE_FORMAT(current_date ,'%Y%m%d'),
 			<if test="updatetime != null  and updatetime != ''  ">#{updatetime},</if>
 			<if test="isupdate != null  ">#{isupdate},</if>
 			<if test="configId != null  ">#{configId},</if>
@@ -68,8 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tablename != null  and tablename != ''  ">tablename = #{tablename},</if>
             <if test="tabledesc != null  and tabledesc != ''  ">tabledesc = #{tabledesc},</if>
             <if test="filename != null  and filename != ''  ">filename = #{filename},</if>
-            <if test="addtime != null  and addtime != ''  ">addtime = #{addtime},</if>
-            <if test="updatetime != null  and updatetime != ''  ">updatetime = #{updatetime},</if>
+            updatetime = DATE_FORMAT(current_date ,'%Y%m%d'),
             <if test="isupdate != null  ">isupdate = #{isupdate},</if>
             <if test="configId != null  ">configId = #{configId},</if>
         </trim>

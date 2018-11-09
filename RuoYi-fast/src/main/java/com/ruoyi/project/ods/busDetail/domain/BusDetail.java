@@ -25,7 +25,7 @@ public class BusDetail extends BaseEntity
 	/** 字段详述 */
 	private String fielddesc;
 	/** 字段类型 */
-	private Integer type;
+	private String fieldtype;
 	/** 是否主键 0 否 1 是 */
 	private Integer iskey;
 	/** 长度 */
@@ -80,14 +80,14 @@ public class BusDetail extends BaseEntity
 	{
 		return fielddesc;
 	}
-	public void setType(Integer type) 
+	public void setFieldtype(String fieldtype)
 	{
-		this.type = type;
+		this.fieldtype = fieldtype;
 	}
 
-	public Integer getType() 
+	public String getFieldtype()
 	{
-		return type;
+		return fieldtype;
 	}
 	public void setIskey(Integer iskey) 
 	{
@@ -126,6 +126,7 @@ public class BusDetail extends BaseEntity
 		return updatetime;
 	}
 
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
@@ -133,7 +134,7 @@ public class BusDetail extends BaseEntity
             .append("fieldlocation", getFieldlocation())
             .append("fieldname", getFieldname())
             .append("fielddesc", getFielddesc())
-            .append("type", getType())
+            .append("type", getFieldtype())
             .append("iskey", getIskey())
             .append("length", getLength())
             .append("addtime", getAddtime())
