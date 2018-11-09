@@ -2,6 +2,8 @@ package com.ruoyi.project.ods.busDetail.controller;
 
 import java.util.List;
 
+import com.ruoyi.project.ods.bus.domain.Bus;
+import com.ruoyi.project.ods.bus.service.IBusService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,9 @@ public class BusDetailController extends BaseController {
 
     @Autowired
     private IBusDetailService busDetailService;
+    @Autowired
+    private IBusService busService;
+
 
     @RequiresPermissions("ods:busDetail:view")
     @GetMapping()
@@ -55,7 +60,8 @@ public class BusDetailController extends BaseController {
      * 新增数据明细
      */
     @GetMapping("/add")
-    public String add() {
+    public String add(ModelMap modelMap) {
+        modelMap.put("bus",busService.selectBusList(new Bus()));
         return prefix + "/add";
     }
 
@@ -77,6 +83,7 @@ public class BusDetailController extends BaseController {
     public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
         BusDetail busDetail = busDetailService.selectBusDetailById(id);
         mmap.put("busDetail", busDetail);
+        mmap.put("bus",busService.selectBusList(new Bus()));
         return prefix + "/edit";
     }
 

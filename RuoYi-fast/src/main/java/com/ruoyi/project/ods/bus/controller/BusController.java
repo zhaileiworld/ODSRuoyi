@@ -2,6 +2,7 @@ package com.ruoyi.project.ods.bus.controller;
 
 import java.util.List;
 
+import com.ruoyi.project.ods.busConfig.domain.BusConfig;
 import com.ruoyi.project.ods.busConfig.service.IBusConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,8 @@ public class BusController extends BaseController {
      * 新增业务
      */
     @GetMapping("/add")
-    public String add() {
+    public String add(ModelMap map) {
+        map.put("busConfigs",configService.selectBusConfigList(new BusConfig()));
         return prefix + "/add";
     }
 
@@ -80,6 +82,7 @@ public class BusController extends BaseController {
     public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
         Bus bus = busService.selectBusById(id);
         mmap.put("bus", bus);
+        mmap.put("busConfigs",configService.selectBusConfigList(new BusConfig()));
         return prefix + "/edit";
     }
 

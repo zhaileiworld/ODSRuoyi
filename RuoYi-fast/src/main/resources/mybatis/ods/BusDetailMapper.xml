@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="fieldlocation"    column="fieldlocation"    />
         <result property="fieldname"    column="fieldname"    />
         <result property="fielddesc"    column="fielddesc"    />
-        <result property="type"    column="type"    />
+        <result property="fieldtype"    column="fieldtype"    />
         <result property="iskey"    column="iskey"    />
         <result property="length"    column="length"    />
         <result property="addtime"    column="addtime"    />
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectBusDetailVo">
-        select id, tableid, fieldlocation, fieldname, fielddesc, type, iskey, length, addtime, updatetime from tf_bus_detail
+        select id, tableid, fieldlocation, fieldname, fielddesc, fieldtype, iskey, length, addtime, updatetime from tf_bus_detail
     </sql>
 	
     <select id="selectBusDetailList" parameterType="BusDetail" resultMap="BusDetailResult">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="fieldlocation != null "> and fieldlocation = #{fieldlocation}</if>
              <if test="fieldname != null  and fieldname != '' "> and fieldname = #{fieldname}</if>
              <if test="fielddesc != null  and fielddesc != '' "> and fielddesc = #{fielddesc}</if>
-             <if test="type != null "> and type = #{type}</if>
+             <if test="fieldtype != null "> and fieldtype = #{fieldtype}</if>
              <if test="iskey != null "> and iskey = #{iskey}</if>
              <if test="length != null "> and length = #{length}</if>
              <if test="addtime != null  and addtime != '' "> and addtime = #{addtime}</if>
@@ -50,10 +50,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="fieldlocation != null  ">fieldlocation,</if>
 			<if test="fieldname != null  and fieldname != ''  ">fieldname,</if>
 			<if test="fielddesc != null  and fielddesc != ''  ">fielddesc,</if>
-			<if test="type != null  ">type,</if>
+			<if test="fieldtype != null  ">fieldtype,</if>
 			<if test="iskey != null  ">iskey,</if>
 			<if test="length != null  ">length,</if>
-			<if test="addtime != null  and addtime != ''  ">addtime,</if>
+			addtime,
 			<if test="updatetime != null  and updatetime != ''  ">updatetime,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -62,10 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="fieldlocation != null  ">#{fieldlocation},</if>
 			<if test="fieldname != null  and fieldname != ''  ">#{fieldname},</if>
 			<if test="fielddesc != null  and fielddesc != ''  ">#{fielddesc},</if>
-			<if test="type != null  ">#{type},</if>
+			<if test="fieldtype != null  ">#{fieldtype},</if>
 			<if test="iskey != null  ">#{iskey},</if>
 			<if test="length != null  ">#{length},</if>
-			<if test="addtime != null  and addtime != ''  ">#{addtime},</if>
+            DATE_FORMAT(current_date ,'%Y%m%d'),
 			<if test="updatetime != null  and updatetime != ''  ">#{updatetime},</if>
          </trim>
     </insert>
@@ -77,11 +77,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fieldlocation != null  ">fieldlocation = #{fieldlocation},</if>
             <if test="fieldname != null  and fieldname != ''  ">fieldname = #{fieldname},</if>
             <if test="fielddesc != null  and fielddesc != ''  ">fielddesc = #{fielddesc},</if>
-            <if test="type != null  ">type = #{type},</if>
+            <if test="fieldtype != null  ">fieldtype = #{fieldtype},</if>
             <if test="iskey != null  ">iskey = #{iskey},</if>
             <if test="length != null  ">length = #{length},</if>
             <if test="addtime != null  and addtime != ''  ">addtime = #{addtime},</if>
-            <if test="updatetime != null  and updatetime != ''  ">updatetime = #{updatetime},</if>
+            updatetime = DATE_FORMAT(current_date ,'%Y%m%d')
         </trim>
         where id = #{id}
     </update>
