@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.ods.plan.mapper.PlanMapper">
+    
+    <resultMap type="Plan" id="PlanResult">
+        <result property="id"    column="id"    />
+        <result property="busid"    column="busid"    />
+        <result property="tableName"    column="tableName"    />
+        <result property="dealStatus"    column="dealStatus"    />
+        <result property="dealTime"    column="dealTime"    />
+    </resultMap>
+	
+	<sql id="selectPlanVo">
+        select id, busid, tableName, dealStatus, dealTime from tf_plan
+    </sql>
+	
+    <select id="selectPlanList" parameterType="Plan" resultMap="PlanResult">
+        <include refid="selectPlanVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="busid != null "> and busid = #{busid}</if>
+             <if test="tableName != null  and tableName != '' "> and tableName = #{tableName}</if>
+             <if test="dealStatus != null "> and dealStatus = #{dealStatus}</if>
+             <if test="dealTime != null  and dealTime != '' "> and dealTime = #{dealTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectPlanById" parameterType="Integer" resultMap="PlanResult">
+        <include refid="selectPlanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPlan" parameterType="Plan">
+        insert into tf_plan
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="busid != null  ">busid,</if>
+			<if test="tableName != null  and tableName != ''  ">tableName,</if>
+			<if test="dealStatus != null  ">dealStatus,</if>
+			<if test="dealTime != null  and dealTime != ''  ">dealTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="busid != null  ">#{busid},</if>
+			<if test="tableName != null  and tableName != ''  ">#{tableName},</if>
+			<if test="dealStatus != null  ">#{dealStatus},</if>
+			<if test="dealTime != null  and dealTime != ''  ">#{dealTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePlan" parameterType="Plan">
+        update tf_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="busid != null  ">busid = #{busid},</if>
+            <if test="tableName != null  and tableName != ''  ">tableName = #{tableName},</if>
+            <if test="dealStatus != null  ">dealStatus = #{dealStatus},</if>
+            <if test="dealTime != null  and dealTime != ''  ">dealTime = #{dealTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deletePlanById" parameterType="Integer">
+        delete from tf_plan where id = #{id}
+    </delete>
+	
+    <delete id="deletePlanByIds" parameterType="String">
+        delete from tf_plan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
