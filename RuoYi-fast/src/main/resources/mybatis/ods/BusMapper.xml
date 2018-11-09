@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.ods.bus.mapper.BusMapper">
+    
+    <resultMap type="Bus" id="BusResult">
+        <result property="id"    column="id"    />
+        <result property="tablename"    column="tablename"    />
+        <result property="tabledesc"    column="tabledesc"    />
+        <result property="filename"    column="filename"    />
+        <result property="addtime"    column="addtime"    />
+        <result property="updatetime"    column="updatetime"    />
+        <result property="isupdate"    column="isupdate"    />
+        <result property="configId"    column="configId"    />
+    </resultMap>
+	
+	<sql id="selectBusVo">
+        select id, tablename, tabledesc, filename, addtime, updatetime, isupdate, configId from tf_bus
+    </sql>
+	
+    <select id="selectBusList" parameterType="Bus" resultMap="BusResult">
+        <include refid="selectBusVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="tablename != null  and tablename != '' "> and tablename = #{tablename}</if>
+             <if test="tabledesc != null  and tabledesc != '' "> and tabledesc = #{tabledesc}</if>
+             <if test="filename != null  and filename != '' "> and filename = #{filename}</if>
+             <if test="addtime != null  and addtime != '' "> and addtime = #{addtime}</if>
+             <if test="updatetime != null  and updatetime != '' "> and updatetime = #{updatetime}</if>
+             <if test="isupdate != null "> and isupdate = #{isupdate}</if>
+             <if test="configId != null "> and configId = #{configId}</if>
+         </where>
+    </select>
+    
+    <select id="selectBusById" parameterType="Integer" resultMap="BusResult">
+        <include refid="selectBusVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBus" parameterType="Bus">
+        insert into tf_bus
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="tablename != null  and tablename != ''  ">tablename,</if>
+			<if test="tabledesc != null  and tabledesc != ''  ">tabledesc,</if>
+			<if test="filename != null  and filename != ''  ">filename,</if>
+			<if test="addtime != null  and addtime != ''  ">addtime,</if>
+			<if test="updatetime != null  and updatetime != ''  ">updatetime,</if>
+			<if test="isupdate != null  ">isupdate,</if>
+			<if test="configId != null  ">configId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="tablename != null  and tablename != ''  ">#{tablename},</if>
+			<if test="tabledesc != null  and tabledesc != ''  ">#{tabledesc},</if>
+			<if test="filename != null  and filename != ''  ">#{filename},</if>
+			<if test="addtime != null  and addtime != ''  ">#{addtime},</if>
+			<if test="updatetime != null  and updatetime != ''  ">#{updatetime},</if>
+			<if test="isupdate != null  ">#{isupdate},</if>
+			<if test="configId != null  ">#{configId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateBus" parameterType="Bus">
+        update tf_bus
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tablename != null  and tablename != ''  ">tablename = #{tablename},</if>
+            <if test="tabledesc != null  and tabledesc != ''  ">tabledesc = #{tabledesc},</if>
+            <if test="filename != null  and filename != ''  ">filename = #{filename},</if>
+            <if test="addtime != null  and addtime != ''  ">addtime = #{addtime},</if>
+            <if test="updatetime != null  and updatetime != ''  ">updatetime = #{updatetime},</if>
+            <if test="isupdate != null  ">isupdate = #{isupdate},</if>
+            <if test="configId != null  ">configId = #{configId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteBusById" parameterType="Integer">
+        delete from tf_bus where id = #{id}
+    </delete>
+	
+    <delete id="deleteBusByIds" parameterType="String">
+        delete from tf_bus where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
