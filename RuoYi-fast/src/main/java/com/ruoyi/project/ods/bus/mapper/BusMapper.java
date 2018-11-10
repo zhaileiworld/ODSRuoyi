@@ -1,6 +1,8 @@
 package com.ruoyi.project.ods.bus.mapper;
 
 import com.ruoyi.project.ods.bus.domain.Bus;
+import com.ruoyi.project.ods.busConfig.domain.BusConfig;
+
 import java.util.List;	
 
 /**
@@ -58,5 +60,6 @@ public interface BusMapper
      * @return 结果
      */
 	public int deleteBusByIds(String[] ids);
-	
+
+    List<Bus> selectByBusConfig(BusConfig config);
 }

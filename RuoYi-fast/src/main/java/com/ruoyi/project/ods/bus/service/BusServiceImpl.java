@@ -1,6 +1,8 @@
 package com.ruoyi.project.ods.bus.service;
 
 import java.util.List;
+
+import com.ruoyi.project.ods.busConfig.domain.BusConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.ods.bus.mapper.BusMapper;
@@ -79,5 +81,10 @@ public class BusServiceImpl implements IBusService
 	{
 		return busMapper.deleteBusByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public List<Bus> selectByBusConfig(BusConfig config)
+	{
+		return busMapper.selectByBusConfig(config);
+	}
 }
