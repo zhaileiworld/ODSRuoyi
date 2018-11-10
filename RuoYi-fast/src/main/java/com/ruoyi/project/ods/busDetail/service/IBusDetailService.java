@@ -50,5 +50,13 @@ public interface IBusDetailService
      * @return 结果
      */
 	public int deleteBusDetailByIds(String ids);
-	
+
+
+	/**
+	 * 根据主表id查询明细 列表
+	 * @param tableid  主表id
+	 * @return
+	 */
+	public List<BusDetail> selectBusDetailByTableId(Integer tableid);
+
 }

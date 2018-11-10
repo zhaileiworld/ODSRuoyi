@@ -58,5 +58,6 @@ public interface BusDetailMapper
      * @return 结果
      */
 	public int deleteBusDetailByIds(String[] ids);
-	
+
+    List<BusDetail> selectBusDetailByTableId(Integer tableid);
 }
