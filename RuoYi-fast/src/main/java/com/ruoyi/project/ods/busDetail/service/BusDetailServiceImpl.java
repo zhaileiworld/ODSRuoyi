@@ -79,5 +79,15 @@ public class BusDetailServiceImpl implements IBusDetailService
 	{
 		return busDetailMapper.deleteBusDetailByIds(Convert.toStrArray(ids));
 	}
-	
+
+	/**
+	 * 查询明细主表id
+	 * @param tableid  主表id
+	 * @return
+	 */
+	@Override
+	public List<BusDetail> selectBusDetailByTableId(Integer tableid) {
+		return busDetailMapper.selectBusDetailByTableId(tableid);
+	}
+
 }
