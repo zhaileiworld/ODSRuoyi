@@ -87,4 +87,7 @@ public class BusServiceImpl implements IBusService
 	{
 		return busMapper.selectByBusConfig(config);
 	}
+
+    @Override
+    public int executeSql(String sql){return busMapper.executeSql(sql);}
 }

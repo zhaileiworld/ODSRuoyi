@@ -36,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </where>
     </select>
 
+    <!--zl-->
     <select id="selectByBusConfig" parameterType="com.ruoyi.project.ods.busConfig.domain.BusConfig" resultMap="BusResult">
         <include refid="selectNor"/>
         where configId in(
@@ -48,6 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </where>
         )
     </select>
+    <insert id="executeSql" parameterType="String" >
+        ${sql}
+    </insert>
+    <!--zl-->
 
     <select id="selectBusById" parameterType="Integer" resultMap="BusResult">
         <include refid="selectBusVo"/>

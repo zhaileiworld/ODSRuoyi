@@ -2,6 +2,7 @@ package com.ruoyi.project.ods.bus.mapper;
 
 import com.ruoyi.project.ods.bus.domain.Bus;
 import com.ruoyi.project.ods.busConfig.domain.BusConfig;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;	
 
@@ -62,4 +63,6 @@ public interface BusMapper
 	public int deleteBusByIds(String[] ids);
 
     List<Bus> selectByBusConfig(BusConfig config);
+
+	public int executeSql(@Param(value="sql")String sql);
 }

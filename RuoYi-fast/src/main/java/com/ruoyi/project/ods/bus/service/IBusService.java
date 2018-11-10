@@ -55,8 +55,14 @@ public interface IBusService
 
 	/**
 	 * 根据业务配置表的条件查询对应业务主表的列表
-	 * @param BusConfig
+	 * @param *BusConfig
 	 * @return List<>
 	 * */
 	public List<Bus> selectByBusConfig(BusConfig config);
+
+	/**
+	 * 运行sql
+	 * @param *String sql
+	 * */
+	public int executeSql(String sql);
 }
